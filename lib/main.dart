@@ -1,6 +1,45 @@
+import 'package:cc_signalr/src/cc_signalr.dart';
+import 'package:cc_signalr/src/cc_signalr_options.dart';
+import 'package:cc_signalr/src/example/example.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:signalr_netcore/json_hub_protocol.dart';
+import 'package:signalr_netcore/signalr_client.dart';
 
 void main() {
+  CCSignalR.init(
+    connectionOptions: HttpConnectionOptions(
+      skipNegotiation: true,
+      transport: HttpTransportType.WebSockets,
+      logMessageContent: false,
+    ),
+    signalROptions: CCSignalROptions(
+      url: "https://gameapi-stage.mobilproses.com/rps/rpsHub",
+      autoReconnect: true,
+      hubProtocol: JsonHubProtocol(),
+      onConnected: (HubConnection connection) async {
+        String connectionId =
+            await connection.invoke("getConnectionId") as String;
+        print("Connected : " + connectionId);
+      },
+      onDisconnected: (value) {
+        print("Disconnected");
+      },
+      onReconnected: (value) {
+        print("Reconnected");
+      },
+    ),
+    loggingOptions: CCSignalRLogging(
+      logEnabled: true,
+      logLevel: Level.INFO,
+    ),
+    modules: [
+      Example(),
+    ],
+  );
+
+  CCSignalR.connect();
+
   runApp(const MyApp());
 }
 

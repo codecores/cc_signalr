@@ -4,5 +4,7 @@ class Example extends HUBModule {
   Example() : super("receiveMainPageStream");
 
   @override
-  void listen(List<Object?>? parameters) {}
+  void listen(List<Object?>? parameters) {
+    print("Veri geldi : " + parameters.toString());
+  }
 }

@@ -1,4 +1,5 @@
-import 'package:cc_signalr/src/handlers/IHUBHandler.dart';
+import 'package:cc_signalr/src/cc_signalr.dart';
+import 'package:cc_signalr/src/handlers/i_hub_handler.dart';
 
 abstract class HUBModule implements IHUBHandler {
   String key;
@@ -6,8 +7,17 @@ abstract class HUBModule implements IHUBHandler {
   HUBModule(this.key);
 
   @override
-  void request() {
-    SocketManager.hubConnection.off(key);
-    SocketManager.hubConnection.on(key, listen);
+  void subscribe() {
+    if (CCSignalR.hubConnection != null) {
+      CCSignalR.hubConnection!.off(key);
+      CCSignalR.hubConnection!.on(key, listen);
+    }
+  }
+
+  @override
+  void unsubscribe() {
+    if (CCSignalR.hubConnection != null) {
+      CCSignalR.hubConnection!.off(key);
+    }
   }
 }

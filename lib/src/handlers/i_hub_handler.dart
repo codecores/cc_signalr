@@ -1,4 +1,5 @@
 abstract class IHUBHandler {
-  void request();
+  void subscribe();
+  void unsubscribe();
   void listen(List<Object?>? parameters);
 }
