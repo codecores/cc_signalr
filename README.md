@@ -1,27 +1,27 @@
 # CC SignalR for Flutter
 
-CC SignalR, Flutter uygulamaları için SignalR desteği sağlayan bir eklentidir. Bu eklenti, SignalR bağlantılarını yönetmeyi ve olay tabanlı iletişim kurmayı kolaylaştırır.
+CC SignalR is a plugin that provides SignalR support for Flutter applications. This plugin makes it easy to manage SignalR connections and communicate using an event-driven approach.
 
-## Kurulum
+## Installation
 
-`pubspec.yaml` dosyanıza aşağıdaki bağımlılığı ekleyin:
+Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
   cc_signalr: ^1.0.0
 ```
 
-Ardından, bağımlılıkları yüklemek için terminalden aşağıdaki komutu çalıştırın:
+Then, run the following command in the terminal to load the dependencies:
 
 ```sh
 flutter pub get
 ```
 
-## Kullanım
+## Usage
 
-### 1. Bağlantı Seçeneklerini Tanımlayın
+### 1. Define Connection Options
 
-Gerekli modülleri eklemek için `init` metodunu kullanın. Bağlantı seçeneklerini ve yapılandırmaları doğrudan bu metodun içinde tanımlayın.
+Use the `init` method to add the necessary modules. Define the connection options and configurations directly within this method.
 
 ```dart
 import 'package:cc_signalr/cc_signalr.dart';
@@ -57,28 +57,45 @@ void main() {
 }
 ```
 
-### 2. Modülleri Kullanma
+### 2. Using Modules
 
-Örnek modülünüzü kullanarak SignalR üzerinden mesajlar alabilir ve yönetebilirsiniz.
+You can use your example module to receive and manage messages over SignalR.
 
 ```dart
 void main() {
-  // Diğer başlatma kodları...
+  // Other initialization code...
 
-  //Bağlantıyı başlatın
+  // Start the connection
   CCSignalR.connect();
 
-  // Modülü abone edin
+  // Subscribe to the module
   CCSignalR.getModule<Example>().subscribe();
 
-  // Modülü abonelikten çıkarın
+  // Unsubscribe from the module
   CCSignalR.getModule<Example>().unsubscribe();
 }
 ```
 
-### Örnek Kod
+### Create Your Own Module
 
-Aşağıda, tam örnek kodu bulabilirsiniz:
+The `HUBModule` class is inherited to listen for a specific SignalR message. This class listens for messages coming over SignalR and prints these messages to the console. You can create your own module by defining a class like this:
+
+```dart
+import 'package:cc_signalr/src/modules/hub_module.dart';
+
+class Example extends HUBModule {
+  Example() : super("receiveMainPageStream");
+
+  @override
+  void listen(List<Object?>? parameters) {
+    print("Broadcast : " + parameters.toString());
+  }
+}
+```
+
+### Example Code
+
+Below is the complete example code:
 
 ```dart
 void main() {
@@ -118,33 +135,16 @@ void main() {
 }
 ```
 
-### Create Own Module
+#### Explanation
 
-`HUBModule` sınıfından türetilmiştir ve belirli bir SignalR mesajını dinlemek için kullanılır. Bu sınıf, SignalR üzerinden gelen mesajları dinler ve bu mesajları konsola yazdırır. You can create your own module by defining a class like this:
+- **Inheritance**: The `Example` class is inherited from the `HUBModule` class. This means that the `Example` class inherits all the properties and methods of the `HUBModule` class.
+- **Constructor**: The constructor of the `Example` class calls the constructor of the `HUBModule` class with the `"receiveMainPageStream"` parameter. This means that the `Example` class will listen to the `"receiveMainPageStream"` message.
+- **`listen` Method**: This method listens for messages coming from SignalR. The `parameters` parameter contains the content of the message from SignalR, and this content is printed to the console.
 
-```dart
-import 'package:cc_signalr/src/modules/hub_module.dart';
+## Contributing
 
-class Example extends HUBModule {
-  Example() : super("receiveMainPageStream");
+If you would like to contribute to this project, please send a pull request or open an issue.
 
-  @override
-  void listen(List<Object?>? parameters) {
-    print("Broadcast : " + parameters.toString());
-  }
-}
-```
+## License
 
-#### Açıklama
-
-- **Kalıtım**: `Example` sınıfı, `HUBModule` sınıfından türetilmiştir. Bu, `Example` sınıfının `HUBModule` sınıfının tüm özelliklerini ve metodlarını miras aldığı anlamına gelir.
-- **Konstruktor**: `Example` sınıfının yapıcı metodu, `HUBModule` sınıfının yapıcı metodunu `"receiveMainPageStream"` parametresi ile çağırır. Bu, `Example` sınıfının `"receiveMainPageStream"` mesajını dinleyeceği anlamına gelir.
-- **`listen` Metodu**: Bu metod, SignalR'dan gelen mesajları dinler. `parameters` parametresi, SignalR'dan gelen mesajın içeriğini içerir ve bu içerik konsola yazdırılır.
-
-## Katkıda Bulunma
-
-Bu projeye katkıda bulunmak isterseniz, lütfen bir pull request gönderin veya bir issue açın.
-
-## Lisans
-
-Bu proje MIT lisansı ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
+This project is licensed under the MIT License. For more information, see the `LICENSE` file.
