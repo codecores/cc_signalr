@@ -8,16 +8,12 @@ abstract class HUBModule implements IHUBHandler {
 
   @override
   void subscribe() {
-    if (CCSignalR.hubConnection != null) {
-      CCSignalR.hubConnection!.off(key);
-      CCSignalR.hubConnection!.on(key, listen);
-    }
+    CCSignalR.hubConnection.off(key);
+    CCSignalR.hubConnection.on(key, listen);
   }
 
   @override
   void unsubscribe() {
-    if (CCSignalR.hubConnection != null) {
-      CCSignalR.hubConnection!.off(key);
-    }
+    CCSignalR.hubConnection.off(key);
   }
 }

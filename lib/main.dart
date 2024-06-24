@@ -1,6 +1,6 @@
 import 'package:cc_signalr/src/cc_signalr.dart';
 import 'package:cc_signalr/src/cc_signalr_options.dart';
-import 'package:cc_signalr/src/example/example.dart';
+import 'package:cc_signalr/src/provider/example.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:signalr_netcore/json_hub_protocol.dart';

@@ -1,11 +1,10 @@
+import 'package:cc_signalr/src/provider/example.dart';
 import 'package:cc_signalr/src/cc_signalr_options.dart';
-import 'package:cc_signalr/src/example/example.dart';
 import 'package:cc_signalr/src/modules/hub_module.dart';
 import 'package:logging/logging.dart';
 import 'package:signalr_netcore/http_connection_options.dart';
 import 'package:signalr_netcore/hub_connection.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
-import 'package:signalr_netcore/json_hub_protocol.dart';
 import 'package:signalr_netcore/web_supporting_http_client.dart';
 
 class CCSignalR {
@@ -78,11 +77,9 @@ class CCSignalR {
   }
 
   static void connect() async {
-    if (hubConnection == null) return;
+    await hubConnection.start();
 
-    await hubConnection!.start();
-
-    hubConnection!.onreconnected(
+    hubConnection.onreconnected(
       ({String? connectionId}) async {
         if (signalROptions.onReconnected != null) {
           signalROptions.onReconnected!(connectionId);
@@ -90,7 +87,7 @@ class CCSignalR {
       },
     );
 
-    hubConnection!.onclose(
+    hubConnection.onclose(
       ({Exception? error}) {
         if (signalROptions.onDisconnected != null) {
           signalROptions.onDisconnected!(error);
@@ -99,7 +96,7 @@ class CCSignalR {
     );
 
     if (signalROptions.onConnected != null) {
-      signalROptions.onConnected!(hubConnection!);
+      signalROptions.onConnected!(hubConnection);
     }
   }
 

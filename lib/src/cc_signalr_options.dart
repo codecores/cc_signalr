@@ -1,8 +1,6 @@
 import 'package:logging/logging.dart';
-import 'package:signalr_netcore/http_connection_options.dart';
 import 'package:signalr_netcore/ihub_protocol.dart';
 import 'package:signalr_netcore/iretry_policy.dart';
-import 'package:signalr_netcore/itransport.dart';
 import 'package:signalr_netcore/json_hub_protocol.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 
