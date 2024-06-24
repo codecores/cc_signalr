@@ -76,7 +76,7 @@ void main() {
 }
 ```
 
-### Create Your Own Module
+### 3. Create Your Own Module
 
 The `HUBModule` class is inherited to listen for a specific SignalR message. This class listens for messages coming over SignalR and prints these messages to the console. You can create your own module by defining a class like this:
 
