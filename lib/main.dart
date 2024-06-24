@@ -38,6 +38,8 @@ void main() {
     ],
   );
 
+  CCSignalR.getModule<Example>().unsubscribe();
+
   CCSignalR.connect();
 
   runApp(const MyApp());
