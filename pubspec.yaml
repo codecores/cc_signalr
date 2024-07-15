@@ -1,7 +1,7 @@
 name: cc_signalr
-description: "CC SignalR is a Flutter plugin that provides SignalR support, enabling easy management of SignalR connections and event-driven communication. This plugin allows you to define connection options, subscribe to modules, and create custom modules to listen for specific SignalR messages, making it a powerful tool for real-time applications."
-homepage: https://github.com/codecores/cc_signalr
+description: "CC SignalR is a Flutter plugin that provides SignalR support, enabling easy management"
 version: 1.0.0+1
+homepage: https://github.com/codecores/cc_signalr
 
 environment:
   sdk: '>=3.4.3 <4.0.0'
