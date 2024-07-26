@@ -1,3 +1,5 @@
+[![pub package](https://img.shields.io/pub/v/http.svg)](https://pub.dev/packages/cc_signalr)
+
 # CC SignalR for Flutter
 
 CC SignalR is a plugin that provides SignalR support for Flutter applications. This plugin makes it easy to manage SignalR connections and communicate using an event-driven approach.
